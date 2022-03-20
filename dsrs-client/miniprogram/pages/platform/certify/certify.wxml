@@ -1,0 +1,11 @@
+<page-meta root-font-size="system" />
+<view class="page" data-weui-theme="{{theme}}" data-weui-mode="{{mode}}">
+  <form class="weui-form" bindsubmit="onTapCertify">
+    <view class="weui-form__text-area">
+      <h2 class="weui-form__title">平台认证</h2>
+    </view>
+    <view class="weui-form__opr-area">
+      <button class="weui-btn weui-btn_primary" form-type="submit">申请认证</button>
+    </view>
+  </form>
+</view>

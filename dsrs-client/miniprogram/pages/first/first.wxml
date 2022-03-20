@@ -1,0 +1,5 @@
+<view class="container">
+    <button class="weui-btn weui-btn_primary" bindtap="onTapStudent">我是驾校学生</button>
+    <button class="weui-btn weui-btn_default" bindtap="onTapSchool">我是驾校人员</button>
+    <button class="weui-btn weui-btn_warn" bindtap="onTapPlatform">我是平台人员</button>
+</view>

@@ -1,0 +1,15 @@
+<view class="page" data-weui-theme="{{theme}}" data-weui-mode="{{mode}}">
+    <view class="weui-article">
+        <view aria-role="heading" aria-level="4" class="weui-article__h1">您还没有进行驾校认证，无法进行驾校操作</view>
+        <view class="weui-article__section">
+            <view class="weui-article__h2">请填写驾校信息，申请认证</view>
+            <view class="weui-article__section">
+                <view class="weui-article__h3">平台管理人员审批后，将会通过小程序通知您</view>
+                <view class="weui-article__section">
+                    <view class="weui-article__h4">注意：认证通过后，此账号会变成驾校管理者账号请谨慎操作</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<button class="weui-btn weui-btn_primary" bindtap="onTapSchoolCertify">驾校认证</button>

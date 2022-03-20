@@ -1,0 +1,4 @@
+<view class="container">
+  <text class="">您的驾校认证已提交</text>
+  <text class="">现在正在等待平台人员审核</text>
+</view>

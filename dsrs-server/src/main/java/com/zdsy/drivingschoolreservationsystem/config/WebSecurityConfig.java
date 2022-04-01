@@ -15,7 +15,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/platform/*").hasRole("PLATFORM")
                 .antMatchers("/school/*").hasRole("SCHOOL")
                 .antMatchers("/student/*").hasRole("STUDENT")
-                .antMatchers("/user/*").hasAnyRole("PLATFORM", "SCHOOL", "STUDENT")
+                .antMatchers("/user/*").hasAnyRole("USER")
                 .antMatchers("/anonymous/*").anonymous()
                 .anyRequest().denyAll();
 

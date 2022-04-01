@@ -1,5 +1,7 @@
 package com.zdsy.drivingschoolreservationsystem.model;
 
+import java.security.Principal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,10 +13,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class User {
+public class User implements Principal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
     private String username;
     private String avatarUrl;
     private String openid;// 用户唯一标识
@@ -22,5 +24,10 @@ public class User {
 
     public User(String openid) {
         this.openid = openid;
+    }
+
+    @Override
+    public String getName() {
+        return this.id.toString();
     }
 }

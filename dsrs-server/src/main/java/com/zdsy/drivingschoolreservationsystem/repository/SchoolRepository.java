@@ -4,6 +4,8 @@ import com.zdsy.drivingschoolreservationsystem.model.School;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface SchoolRepository extends CrudRepository<School, Long> {
-    School findByOwner(Long owner);
+public interface SchoolRepository extends CrudRepository<School, Integer> {
+    School findByOwner(Integer owner);
+
+    School findByName(String name);
 }

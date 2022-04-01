@@ -28,31 +28,27 @@ public class AnonymousController {
     private UserRepository userRepository;
 
     @PostMapping(path = "/login")
-    public Result login(@RequestParam String code) {
+    public Result login(@RequestParam String code) throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://api.weixin.qq.com/sns/jscode2session?appid={appid}&secret={secret}&js_code={js_code}&grant_type=authorization_code";
         String body = restTemplate.getForObject(url, String.class, WxConstant.appId, WxConstant.appSecret, code);
         ObjectMapper mapper = new ObjectMapper();
-        try {
-            WxSession wxSession = mapper.readValue(body, WxSession.class);
-            Integer errcode = wxSession.getErrcode();
-            if (errcode == null || errcode == WxCodeType.success.getCode()) {
-                String openid = wxSession.getOpenid();
-                User user = userRepository.findByOpenid(openid);
-                if (user == null) {
-                    user = new User(openid);
-                    userRepository.save(user);
-                }
-                Authentication authentication = new UsernamePasswordAuthenticationToken(user, null,
-                        AuthorityUtils.createAuthorityList("ROLE_PLATFORM"));
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                return Result.success(user);
-            } else {
-                return new Result(errcode, wxSession.getErrmsg());
-            }
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return new Result(ResultCode.failed);
+        WxSession wxSession = mapper.readValue(body, WxSession.class);
+
+        Integer errcode = wxSession.getErrcode();
+        if (errcode != WxCodeType.success.getCode()) {
+            return Result.failed();
         }
+
+        String openid = wxSession.getOpenid();
+        User user = userRepository.findByOpenid(openid);
+        if (user == null) {
+            user = new User(openid);
+            userRepository.save(user);
+        }
+        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null,
+                AuthorityUtils.createAuthorityList("ROLE_USER"));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return Result.success(user);
     }
 }

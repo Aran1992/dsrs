@@ -12,14 +12,21 @@ public class Result implements Serializable {
     private Integer code;
     private String message;
 
-    public Result(ResultCode resultCode) {
-        this.code = resultCode.getCode();
-        this.message = resultCode.getMessage();
+    private Result(Integer code) {
+        this.code = code;
     }
 
-    public Result(Integer code, String message) {
+    private Result(Integer code, String message) {
         this.code = code;
         this.message = message;
+    }
+
+    private Result(ResultCode resultCode) {
+        this(resultCode.getCode(), resultCode.getMessage());
+    }
+
+    public static Result success() {
+        return new Result(ResultCode.success);
     }
 
     public static Result success(Object response) {
@@ -28,7 +35,15 @@ public class Result implements Serializable {
         return result;
     }
 
-    public static Result success() {
-        return new Result(ResultCode.success);
+    public static Result failed() {
+        return new Result(ResultCode.failed);
+    }
+
+    public static Result failed(ResultCode resultCode) {
+        return new Result(resultCode.getCode(), resultCode.getMessage());
+    }
+
+    public static Result failed(String message) {
+        return new Result(ResultCode.failed.getCode(), message);
     }
 }

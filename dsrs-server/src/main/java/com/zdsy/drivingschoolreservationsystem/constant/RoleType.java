@@ -3,7 +3,7 @@ package com.zdsy.drivingschoolreservationsystem.constant;
 public enum RoleType {
     Student(0, "学生"),
     SchoolOwner(1, "驾校拥有者"),
-    platformer(2, "平台管理员"),
+    Platformer(2, "平台管理员"),
     StudentNotConfirmed(3, "驾校学生（未确认）"),
     SchoolOwnerNotConfirmed(4, "驾校拥有者（未确认）"),
     PlatformerNotConfirm(5, "平台管理员（未确认）"),

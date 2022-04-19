@@ -2,10 +2,10 @@ package com.zdsy.drivingschoolreservationsystem.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zdsy.drivingschoolreservationsystem.constant.ResultCode;
 import com.zdsy.drivingschoolreservationsystem.constant.WxCodeType;
 import com.zdsy.drivingschoolreservationsystem.constant.WxConstant;
 import com.zdsy.drivingschoolreservationsystem.model.User;
+import com.zdsy.drivingschoolreservationsystem.model.UserPrincipal;
 import com.zdsy.drivingschoolreservationsystem.model.WxSession;
 import com.zdsy.drivingschoolreservationsystem.repository.UserRepository;
 import com.zdsy.drivingschoolreservationsystem.result.Result;
@@ -46,7 +46,9 @@ public class AnonymousController {
             user = new User(openid);
             userRepository.save(user);
         }
-        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null,
+        UserPrincipal principal = new UserPrincipal();
+        principal.setUserId(user.getId());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(principal, null,
                 AuthorityUtils.createAuthorityList("ROLE_USER"));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return Result.success(user);

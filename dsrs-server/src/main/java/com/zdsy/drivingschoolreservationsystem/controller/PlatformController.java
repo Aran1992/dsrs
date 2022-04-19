@@ -20,7 +20,7 @@ public class PlatformController {
     private UserRepository userRepository;
     @Autowired
 
-    @PostMapping("/confirm_platformer")
+    @PostMapping("/confirmPlatformer")
     public Result confirmPlatformer(Integer userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
 
@@ -34,7 +34,7 @@ public class PlatformController {
             return Result.failed();
         }
 
-        user.setRoleType(RoleType.platformer.getCode());
+        user.setRoleType(RoleType.Platformer.getCode());
         userRepository.save(user);
 
         // 是不是得修改该用户的session
